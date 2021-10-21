@@ -15,48 +15,49 @@ $.validator.addMethod("matchPass", function (value, element) {
         return false;
     }
 });
-$(document).ready(()=>{
-    // Login    
-    $("#form1").validate({
-        rules:{
-            email:{
-                required: true,
-                minlength:3,
-                isEmail:true
-            },
-            password:{
-                required:true,
-                minlength:5,
-            }
-        },
-        messages:{
-            email:{
-                required: "*Required Feild",
-                minlength:"Min character 3",
-                isEmail:"Enter a valid Email"
-            },
-            password:{
-                required:"*Required Feild",
-                minlength:"Min character 5",
+// $(document).ready(()=>{
+//     // Login    
+//     $("#form1").validate({
+//         rules:{
+//             email:{
+//                 required: true,
+//                 minlength:3,
+//                 isEmail:true
+//             },
+//             password:{
+//                 required:true,
+//                 minlength:5,
+//             }
+//         },
+//         messages:{
+//             email:{
+//                 required: "*Required Feild",
+//                 minlength:"Min character 3",
+//                 isEmail:"Enter a valid Email"
+//             },
+//             password:{
+//                 required:"*Required Feild",
+//                 minlength:"Min character 5",
 
-            }
-        },
-        submitHandler:function(form){
-            $.ajax({
-                url:"/login",
-                data:$("#form1").serialize(),
-                method:"post",
-                success:function(res){
-                    window.location.reload();
-                },
-                error:function(res){
-                    alert("something went wrong");
-                }
-            })
-        }
-    })
+//             }
+//         },
+//         submitHandler:function(form){
+//             $.ajax({
+//                 url:"/login",
+//                 data:$("#form1").serialize(),
+//                 method:"POST",
+//                 success:function(res){
+//                     if (res) {
+//                         location.href='/'  
+//                 }},
+//                 error:function(res){
+//                     alert("something went wrong !");
+//                 }
+//             })
+//         }
+//     })
 
-})
+// })
 // SignUp
 $(document).ready(()=>{
     $("#form2").validate({
@@ -104,17 +105,18 @@ $(document).ready(()=>{
         },
         submitHandler:function(form){
             $.ajax({
-                url:"/login",
-                data:$("#form1").serialize(),
-                method:"post",
+                url:"/signup",
+                data:$("#form2").serialize(),
+                method:"POST",
                 success:function(res){
-                    window.location.reload();
-                },
-                error:function(res){
-                    alert("something went wrong");
-                }
-            })
-        }
-    })
+                    if (res) {
+                        location.href='/'
 
+                    
+                }
+            }
+        })
+    }
+
+})
 })

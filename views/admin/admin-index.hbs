@@ -1,2 +1,69 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+{{!-- NAVBAR, Hero section features footer --}}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand pl-3" href="#">Admin Panel</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto pr-4">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+      <li class="nav-item dropdown pr-5">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{user.name}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="/logout">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+ <!-- Tables section-->
+ <div class="col-md-12 mt-2 person-table">
+            <h3 class="py-3 mb-4 pt-5 align-center bold-head">All Users </h3>
+        <table class="table align-middle mt-3 mb-5 table-hover" id="myTable">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Place</th>
+      <th scope="col">City</th>
+      <th scope="col">Country</th>
+      <th scope="col">Phone</th>
+    
+    </tr>
+  </thead>
+  <tbody>
+      {{#each users}}
+    <tr>
+      <td scope="row">{{this.name}}</td>
+       <td scope="row">{{this.email}}</td>
+      <td scope="row">{{this.age}},</td>
+      <td scope="row">{{this.gender}}</td>
+      <td scope="row"> {{this.place}} </td>
+      <td scope="row">{{this.city}} </td>
+      <td scope="row">{{this.country}} </td>
+    <td scope="row">{{this.phone}} </td>
+    </tr>
+   {{/each}}
+  </tbody>
+</table>
+</div>
+
+        <footer class="py-5 bg-dark">
+            <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; web 2021</p></div>
+        </footer>
+        <script>
+            $(document).ready( function () {
+    $('#myTable').DataTable();
+        } );
+        </script>

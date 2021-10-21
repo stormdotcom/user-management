@@ -4,7 +4,7 @@ const dbState = {
 }
 module.exports.connect=function(done){
     let url = "mongodb://localhost:27017/DB"
-    let dbname="user-mangement"
+    let dbname="user-management"
 
     mongoClient.connect(url, (err, data)=>{
         if(err) return  done(err)
@@ -14,5 +14,5 @@ module.exports.connect=function(done){
 
 }
 module.exports.get=function() {
-    return state.db
+    return dbState.db
 }

@@ -5,10 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const Handlebars = require('handlebars');
 const hbs = require('express-handlebars')
+const session = require('express-session')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/admin');
-var db = require("./config/connection")
+var db = require("./config/connection");
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -17,6 +19,15 @@ db.connect((err)=>{
   if(err) console.log("DB Connection Error :\n" +err)
   else console.log("DB Connected")
 })
+app.use(session({
+  secret: "ajmal",
+  // store: store,
+  resave: false,
+  saveUninitialized: false, 
+  cookie: {
+    maxAge: 3600000 
+  }
+      }))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

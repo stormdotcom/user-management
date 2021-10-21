@@ -11,6 +11,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-handlebars": "^5.3.4",
+    "express-session": "^1.17.2",
     "hbs": "^4.0.6",
     "http-errors": "~1.6.3",
     "mongodb": "^4.1.3",

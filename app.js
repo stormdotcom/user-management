@@ -1,15 +1,15 @@
 const createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const Handlebars = require('handlebars');
 const hbs = require('express-handlebars')
 const session = require('express-session')
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/admin');
-var db = require("./config/connection");
-var app = express();
+const userRouter = require('./routes/users');
+// const adminRouter = require('./routes/admin');
+const db = require("./config/connection");
+const app = express();
 
 
 // view engine setup
@@ -38,8 +38,8 @@ app.engine('hbs', hbs({
   layoutsDir: path.join(__dirname, 'views/layouts/')
 }));
 
-app.use('/', indexRouter);
-app.use('/admin', usersRouter);
+app.use('/', userRouter);
+// app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

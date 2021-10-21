@@ -3,7 +3,7 @@ const router = express.Router();
 const userAction = require("../controllers/userAction");
 
 const verifyLogin = (req, res, next) => {
-  if (req.session.userLoggedIn) {
+  if (req.session.user?.userLoggedIn) {
     next();
   } else {
     res.redirect("/login");
@@ -36,7 +36,7 @@ router.post('/signup', function(req, res) {
   userAction.signup(req.body).then((response)=>{
     req.session.user=response
     req.session.user.password=null;
-    req.session.userLoggedIn=true
+    req.session.user.userLoggedIn=true
     res.redirect("/")
     
   })
@@ -50,13 +50,13 @@ router.post('/login', function(req, res){
       req.session.user=response
       console.log(req.session.user)
       req.session.user.password=null
-      req.session.userLoggedIn=true
+      req.session.user.userLoggedIn=true
       res.redirect("/")
     })
   });
 
 router.get("/logout", function(req, res){
-  req.session.userLoggedIn=false;
+  req.session.user.userLoggedIn=false;
   req.session.user=null;
   res.redirect("/login")
 })

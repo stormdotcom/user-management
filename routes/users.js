@@ -45,10 +45,7 @@ router.post('/signup', function(req, res) {
 // Handle login
 router.post('/login', function(req, res){
     userAction.login(req.body).then((response)=>{
-      console.log(response)
-     
       req.session.user=response
-      console.log(req.session.user)
       req.session.user.password=null
       req.session.user.userLoggedIn=true
       res.redirect("/")

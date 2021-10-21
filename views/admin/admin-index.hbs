@@ -1,4 +1,9 @@
 {{!-- NAVBAR, Hero section features footer --}}
+  <script>
+            $(document).ready( function () {
+    $('#myTable').DataTable();
+        } );
+        </script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand pl-3" href="#">Admin Panel</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,12 +20,12 @@
       </li>
       <li class="nav-item dropdown pr-5">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{user.name}}
+          {{admin.name}}
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="/logout">Logout</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: smaller;">
+          <a class="dropdown-item" href="#">Logout User (current host)</a>
+          <a class="dropdown-item" href="#">Logout All users</a>
+          <a class="dropdown-item" href="/logout">Logout Admin</a>
         </div>
       </li>
     </ul>
@@ -39,6 +44,8 @@
       <th scope="col">City</th>
       <th scope="col">Country</th>
       <th scope="col">Phone</th>
+      <th scope="col">Actions</th>
+    
     
     </tr>
   </thead>
@@ -46,24 +53,20 @@
       {{#each users}}
     <tr>
       <td scope="row">{{this.name}}</td>
-       <td scope="row">{{this.email}}</td>
-      <td scope="row">{{this.age}},</td>
+      <td scope="row">{{this.age}}</td>
       <td scope="row">{{this.gender}}</td>
       <td scope="row"> {{this.place}} </td>
       <td scope="row">{{this.city}} </td>
       <td scope="row">{{this.country}} </td>
     <td scope="row">{{this.phone}} </td>
+    <td scope="row"> </td>
     </tr>
    {{/each}}
   </tbody>
 </table>
 </div>
 
-        <footer class="py-5 bg-dark">
+        <footer class="py-5 bg-dark fixed-bottom" >
             <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; web 2021</p></div>
         </footer>
-        <script>
-            $(document).ready( function () {
-    $('#myTable').DataTable();
-        } );
-        </script>
+

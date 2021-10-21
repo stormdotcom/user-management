@@ -6,10 +6,11 @@ const logger = require('morgan');
 const Handlebars = require('handlebars');
 const hbs = require('express-handlebars')
 const session = require('express-session')
-var userRouter = require('./routes/users');
-var adminRouter = require("./routes/admin")
+const userRouter = require('./routes/users');
+const adminRouter = require("./routes/admin")
 const db = require("./config/connection");
 const app = express();
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 
 
 // view engine setup
@@ -35,7 +36,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.engine('hbs', hbs({
   extname: 'hbs', defaultLayout: 'layout',
-  layoutsDir: path.join(__dirname, 'views/layouts/')
+  layoutsDir: path.join(__dirname, 'views/layouts/',
+  ), handlebars: allowInsecurePrototypeAccess(Handlebars)
 }));
 
 app.use('/', userRouter);

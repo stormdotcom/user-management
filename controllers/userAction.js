@@ -6,6 +6,7 @@ const ObjectID=require("mongodb").ObjectID
 module.exports={
     signup:(userData)=>{
         return new Promise(async(resolve, reject) => {
+            userData.isBlocked=false;
             userData.password = await bcrypt.hash(userData.password, 10)
             db.get().collection("users").insertOne(userData).then(async (data) =>{
                 let id = data.insertedId.toString()

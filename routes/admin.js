@@ -1,38 +1,51 @@
 const express = require('express');
 const router = express.Router();
-const db = require("../config/connection")
 const adminAction = require("../controllers/adminAction");
+const db = require("../config/connection");
 
 
 // Router Middleware
 const verifyLogin = (req, res, next) => {
-  if (req.session.admin.loggedIn) {
+  if (req.session.adminLoggedIn) {
     next();
   } else {
-    res.redirect("/login");
+    res.redirect("/admin/login");
   }
-/* GET admin listing. */
+}
+/* GET admin . */
 router.get('/',verifyLogin,  async function(req, res, next) {
-  let users =await db.get().collection("users").find()
-
-  res.render('admin/admin-index', {title: "Admin Panel", users})
+  let admin = req.session.admin
+  let users =await db.get().collection("users").find().toArray()
+  res.render('admin/admin-index', {title: "Admin Panel", users, admin})
 });
 
 router.get('/login', function(req, res, next) {
-  if(req.session.admin) {
-    res.redirect("/");}
-    else{
-      res.render('admin/admin-login', {title: "Admin Authentication"}); 
+  if(req.session.adminLoggedIn) {
+    res.redirect("/admin");
+  }
+    else {
+     res.render("admin/admin-login")
     }
   
 });
 router.post('/login', function(req, res, next) {
-  adminAction.Login(req.body).then((admin)=>{
-    req.sesssion.admin=admin
-    req.session.admin.loggedIn=true;
-    req.session.admin.password=null;
-    res.render("/")
+  adminAction.login(req.body).then((admin)=>{
+    if(admin) {
+      req.session.admin=admin
+      req.session.adminLoggedIn=true
+      req.session.admin.password=null;
+      res.redirect("/admin")
+    }
+    else {
+      res.redirect("/admin/login")
+    }
+
   })
 });
-}
+
+router.get('/logout', (req, res)=> {
+  req.session.admin=null
+  req.session.adminLoggedIn=false
+  res.redirect('/admin/login')
+})
 module.exports = router;

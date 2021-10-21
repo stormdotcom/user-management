@@ -42,6 +42,20 @@ router.post('/login', function(req, res, next) {
 
   })
 });
+// Edit users
+router.get("/edit-user/:id", async function(req, res){
+  let admin = req.session.admin
+  let user = await adminAction.getUser(req.params.id)
+  res.render("admin/admin-userEdit", {user})
+});
+router.post("/edit-user/:id", function(req, res){
+  adminAction.updateUser(req.params.id, req.body).then(()=>{
+    res.redirect("/admin");  
+  })
+  
+  
+
+})
 
 router.get('/logout', (req, res)=> {
   req.session.admin=null

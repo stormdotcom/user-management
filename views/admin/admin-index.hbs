@@ -37,7 +37,9 @@
         <table class="table align-middle mt-3 mb-5 table-hover" id="myTable">
   <thead>
     <tr>
+       <th scope="col">#</th>
       <th scope="col">Name</th>
+       <th scope="col">Email</th>
       <th scope="col">Age</th>
       <th scope="col">Gender</th>
       <th scope="col">Place</th>
@@ -52,14 +54,20 @@
   <tbody>
       {{#each users}}
     <tr>
+       <th scope="row">{{@index}} </th>
       <td scope="row">{{this.name}}</td>
+       <td scope="row">{{this.email}}</td>
       <td scope="row">{{this.age}}</td>
       <td scope="row">{{this.gender}}</td>
-      <td scope="row"> {{this.place}} </td>
-      <td scope="row">{{this.city}} </td>
-      <td scope="row">{{this.country}} </td>
+      <td scope="row"> {{this.address.place}} </td>
+      <td scope="row">{{this.address.city}} </td>
+      <td scope="row">{{this.address.country}} </td>
     <td scope="row">{{this.phone}} </td>
-    <td scope="row"> </td>
+    <td scope="row"> 
+      <div class="btn-group btn-group-sm">
+            <a href="/admin/edit-user/{{this._id}}" class="btn btn-primary button">Edit</a>
+            <a href="/admin/delete-user/{{this._id}}"  onclick=" return confirm('Are sure you Block this user {{this.itemName}}?')" class="btn btn-danger button">Block</a> </div>
+    </td>
     </tr>
    {{/each}}
   </tbody>

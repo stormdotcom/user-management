@@ -1,0 +1,67 @@
+<section>
+    <div class="container mb-4">
+
+        <div class="row justify-content-center">
+            <div class="col-md-6 ">
+                <h2 class="text-center pb-4 pt-4">Edit User Details</h2>
+      <div class=" back-btn">
+        <a href="/admin" class="btn btn-primary mb-3 w-30"> back</a>
+      </div>
+    <form action="/admin/edit-user/{{user._id}}" method="POST">
+  <div class="form-group mb-2 mt-">
+   
+  </div>
+  <div class="form-group mb-2">
+    <label for="">Full Name</label>
+    <input type="text" class="form-control" name="name" value="{{user.name}}">
+  </div>
+  <div class="form-group mb-2">
+    <label for="">Gender</label>
+    <select class="form-control" name="gender"  value="{{user.gender}}">
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+     </select>
+    
+  </div>
+  <div class="form-group mb-2">
+    <label for="">Age</label> 
+    <input type="text" class="form-control" name="age"  value="{{ user.age}}">
+  </div>
+    <div class="form-group mb-2">
+    <label for="">Place</label>
+    <input type="text" class="form-control" name="place" value="{{user.address.place}}">
+  </div>
+      <div class="form-group mb-2">
+    <label for="">City</label>
+    <input type="text" class="form-control" name="city" value="{{user.address.city}}">
+  </div>
+        <div class="form-group mb-2">
+    <label for="">Country</label>
+    <input type="text" class="form-control" name="country" list="country" value="{{user.address.country}}">
+      <datalist id="country">
+    <option value="India">
+    <option value="Australia">
+    <option value="USA">
+    <option value="UK">
+    <option value="Canada">
+  </datalist>
+  </div>
+        <div class="form-group mb-2">
+    <label for="">Phone</label>
+    <input type="text" class="form-control" name="phone" value="{{user.phone}}">
+  </div>
+    {{!-- <div class="form-group mb-2">
+    <label for="">Profile Picture</label>
+    <img src="#" alt="product-image" style="width: 100px; height: 100px; padding: 3%" id="uploadedImg">
+    <input type="file" class="form-control" name="image" accept="image/x-png,image/gif,image/jpeg" id="imgInput">
+  </div> --}}
+ <div class="form-group mb-2 text-center"></div>
+ <div class="row justify-content-center">
+  <button type="submit" class="row btn btn-success mt-4  ">Update Information</button> </div>
+    </div>
+</form>
+            </div>
+        </div>
+    </div>
+</section>

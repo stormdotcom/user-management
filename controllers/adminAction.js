@@ -54,7 +54,7 @@ module.exports ={
                 $set:{isBlocked:true}
             }).then((result)=>{
                 console.log(result)
-                resolve(result)
+                resolve({status:true})
             })
         })
     },
@@ -64,10 +64,16 @@ module.exports ={
              db.get().collection("users").updateOne({_id:ObjectID(id)}, {
                 $set:{isBlocked:false}
             }).then((result)=>{
-                console.log(result)
-                resolve(result)
+                resolve({status:true})
             })
         })
+    },
+    deleteUser:(id)=>{
+        return new Promise((resolve, reject)=>{
+        db.get().collection("users").deleteOne({_id:ObjectID(id)}).then((result)=>{
+            resolve({status:true})
+        })
+    })
     }
 
 }

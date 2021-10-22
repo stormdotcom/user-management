@@ -46,7 +46,6 @@ router.post('/login', function(req, res, next) {
 });
 // Edit users
 router.get("/edit-user/:id", async function(req, res){
-  let admin = req.session.admin
   let user = await adminAction.getUser(req.params.id)
   res.render("admin/admin-userEdit", {user})
 });
@@ -55,21 +54,23 @@ router.post("/edit-user/:id", function(req, res){
     res.redirect("/admin");  
   });
  
+})
+// Block User
 router.post("/block-user",  function(req, res){
-  adminAction.blocKUser(id).then((status)=>{
-    res.redirect('/admin')
+  adminAction.blocKUser(req.body.id).then((status)=>{
+    res.json({status:true})
   })
 })
-router.post("/unblock-user/:id",  function(req, res){
-  adminAction.unBlocKUser(req.body).then((status)=>{
-    res.redirect('/admin')
+// Unblock User
+router.post("/unblock-user/",  function(req, res){
+  adminAction.unBlocKUser(req.body.id).then((status)=>{
+    res.json({status:true})
   })
 })
 // Delete User
-router.post("/delete-user/:id",  function(req, res){
-  let id = req.params.id
-  adminAction.unBlocKUser(id).then((status)=>{
-    res.redirect('/admin')
+router.post("/delete-user/",  function(req, res){
+  adminAction.deleteUser(req.body.id).then((status)=>{
+    res.json({status:true})
   })
 })
 
@@ -82,8 +83,6 @@ router.get("/logout-all", function(req, res){
  adminAction.allUserLogout(req.session.admin)
   res.redirect("/admin")
 });
-
-})
 
 router.get('/logout', (req, res)=> {
   req.session.admin=null

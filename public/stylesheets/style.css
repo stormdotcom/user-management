@@ -52,3 +52,9 @@ label.error {
   border-color: #ebccd1;
   padding:1px 20px 1px 20px;
 }
+
+thead {
+  text-align: center;
+}
+
+

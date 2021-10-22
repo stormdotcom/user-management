@@ -42,20 +42,18 @@ $(document).ready(()=>{
 
             }
         },
-        submitHandler:function(form){
-            $.ajax({
-                url:"/login",
-                data:$("#form1").serialize(),
-                method:"POST",
-            })
-        }
+        // submitHandler:function(form){
+        //     $.ajax({
+        //         url:"/login",
+        //         data:$("#form1").serialize(),
+        //         method:"POST",
+        //     })
+        // }
     })
 
 })
 
 $(document).ready(()=>{
-
-
     // SignUp
     $("#form2").validate({
         rules:{
@@ -99,34 +97,60 @@ $(document).ready(()=>{
                 required:"*Required Feild",
                 matchPass:"Password not Matching"
             }
-        },
-        submitHandler:function(form){
-            $.ajax({
-                url:"/signup",
-                data:$("#form2").serialize(),
-                method:"POST",
-        })
-    }
+        }
+    //     submitHandler:function(form){
+    //         $.ajax({
+    //             url:"/signup",
+    //             data:$("#form2").serialize(),
+    //             method:"POST",
+    //     })
+    // }
 
 })
 })
+$('#message1').css('display', 'none')
 function blockUser(id){
     $.ajax({
-        url:"/admin/block-user/",
+        url:"/admin/block-user",
         method:"POST",
-        data:{id},
+        data:{id:id},
         success:(res)=>{
-            location.href="/admin"
+            if(res.status){
+                setTimeout((location.href="/admin"), 500)
+                
+            }
+            else alert("Error while blocking")
+           
         }
 })
 }
 
 function unblockUser(id){
+    console.log(id)
     $.ajax({
-        url:"/admin/unblock-user/" +id,
+        url:"/admin/unblock-user",
         method:"POST",
+        data:{id:id},
         success:(res)=>{
-            location.href="/admin"
+            if(res.status){
+                setTimeout((location.href="/admin"), 500)
+            }
+            else alert("Failed to unblock")
+            
         }
 })
+}
+function deleteUser(id){
+    $.ajax({
+        url:"/admin/delete-user",
+        method:"POST",
+        data:{id:id},
+        success:(res)=>{
+            if(res.status){
+                $('#message1').css('display', 'block')
+                $('#message6').html('Item Removed' )
+                setTimeout((location.href="/admin"), 500)
+            }
+        }
+    })
 }

@@ -3,7 +3,7 @@ const router = express.Router();
 const userAction = require("../controllers/userAction");
 
 const verifyLogin = (req, res, next) => {
-  if (req.session.user?.userLoggedIn) {
+  if (req.session.user.userLoggedIn) {
     next();
   } else {
     res.redirect("/login");
@@ -34,9 +34,9 @@ router.get('/signup', function(req, res){
 // Handle Signup
 router.post('/signup', function(req, res) {
   userAction.signup(req.body).then((response)=>{
-
-    if(!response.err.status) {
-      req.session.user=response.user
+    if(!response?.err?.status) {
+      console.log("im here inside if cond")
+      req.session.user=response;
       req.session.user.password=null;
       req.session.user.userLoggedIn=true
       res.redirect("/")

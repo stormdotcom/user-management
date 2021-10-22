@@ -6,7 +6,7 @@ const ObjectID=require("mongodb").ObjectId
 module.exports={
     signup:(userData)=>{
         return new Promise(async(resolve, reject) => {
-            let response={err:{msg:"", status:false}, user:null}
+            let response={err:{msg:"", status:false}}
             let alreadyExists=await db.get().collection("users").findOne({email:userData.email});
             if(!alreadyExists){
                 userData.isBlocked=false;
@@ -15,7 +15,7 @@ module.exports={
                 db.get().collection("users").insertOne(userData).then(async (data) =>{
                     let id = data.insertedId.toString()
                     let user=await db.get().collection("users").findOne({_id:ObjectID(id)});
-                    resolve(response.user)
+                    resolve(user)
                     })
             } 
             else  {

@@ -67,13 +67,24 @@ router.post("/unblock-user/",  function(req, res){
     res.json({status:true})
   })
 })
+
+router.get("/user-view/:id",async function(req, res){
+  let id = req.params.id;
+  id=id.trim()
+  console.log("test", id)
+  let user =await adminAction.getUser(id)
+  res.render("admin/user-view", user)
+})
+
+
+
 // Delete User
 router.post("/delete-user/",  function(req, res){
   adminAction.deleteUser(req.body.id).then((status)=>{
     res.json({status:true})
   })
 })
-
+// logout single user
 router.get("/logout-user", function(req, res){
   req.session.user.userLoggedIn=false;
   req.session.user=null;

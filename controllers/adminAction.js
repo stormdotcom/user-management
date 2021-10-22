@@ -21,9 +21,8 @@ module.exports ={
     },
     getUser:(id)=>{
         return new Promise(async(resolve, reject)=>{
-            await db.get().collection("users").findOne({_id:ObjectID(id)}).then((user)=>{
-                resolve(user)
-            })
+            let user=await db.get().collection("users").findOne({_id:ObjectID(id)})
+            resolve(user)
         })
     },
     updateUser:(id, userData)=>{
@@ -74,6 +73,13 @@ module.exports ={
             resolve({status:true})
         })
     })
+    },
+    userView:(id)=>{
+        return new Promise(async (resolve, reject)=>{
+            await db.get().collection("users").findOne({_id:ObjectID(id)}).then((user)=>{
+                resolve(user)
+            })
+        })
     }
 
 }

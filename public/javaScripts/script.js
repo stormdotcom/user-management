@@ -154,3 +154,9 @@ function deleteUser(id){
         }
     })
 }
+// function goToProfile(id){
+//     $.ajax({
+//         url:"/admin/user-view/",
+//         method:"get",
+//     })
+// }

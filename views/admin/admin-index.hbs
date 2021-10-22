@@ -61,12 +61,13 @@
       <td scope="row">{{this.address.city}} </td>
       <td scope="row">{{this.address.country}} </td>
     <td scope="row">{{this.phone}} </td>
-    <td scope="row">
+    <td scope="row" class="d-flex justify-content-around align-item-center">
       {{#if this.isBlocked}}
       Blocked 
     {{else }}
     Active
     {{/if}}
+    <a href="/admin/user-view/{{this._id}}" class="view-btn" style="font-size: smaller;">View Profile</a>
     </td>
     <td scope="row"> 
       <div class="btn-group btn-group-sm">
@@ -89,7 +90,4 @@
         </footer>
 
 <script>
-  function blockUser(id){
-    alert("hello")
-  }
 </script>

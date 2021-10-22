@@ -34,22 +34,36 @@ router.get('/signup', function(req, res){
 // Handle Signup
 router.post('/signup', function(req, res) {
   userAction.signup(req.body).then((response)=>{
-    req.session.user=response
-    req.session.user.password=null;
-    req.session.user.userLoggedIn=true
-    res.redirect("/")
-    
+
+    if(!response.err.status) {
+      req.session.user=response.user
+      req.session.user.password=null;
+      req.session.user.userLoggedIn=true
+      res.redirect("/")
+    }
+    else {
+      res.render("users/signup", {err:response.err})
+    }
   })
 });
 
 // Handle login
 router.post('/login', function(req, res){
     userAction.login(req.body).then((response)=>{
-      req.session.user=response
-      req.session.user.password=null
-      req.session.user.userLoggedIn=true
-      res.redirect("/")
+      console.log(response.err.status)
+      if(!response.err.status) {
+        req.session.user=response.user
+        req.session.user.password=null
+        req.session.user.userLoggedIn=true
+        res.redirect("/")
+      }
+      else {
+        res.render("users/login", {err:response.err})
+      }
+
+  
     })
+    
   });
 
 router.get("/logout", function(req, res){

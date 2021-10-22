@@ -4,7 +4,16 @@
       {{! Logo }}
       <h1>Sign Up</h1>
       {{! Error message here }}
-      <form  method="POST" id="form2">
+      {{#if err}}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>!</strong> <small>{{err.msg}}</small>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+     
+      {{/if}}
+      <form action="/signup" method="POST" id="form2">
         <div class="form-row d-flex justify-content-center">
           <div class="col-lg-10 py-3">
             <input

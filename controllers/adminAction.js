@@ -46,5 +46,28 @@ module.exports ={
             })
         })
 
+    },
+    blocKUser:(id)=>{
+        console.log(id);
+        return new Promise((resolve, reject)=>{
+             db.get().collection("users").updateOne({_id:ObjectID(id)}, {
+                $set:{isBlocked:true}
+            }).then((result)=>{
+                console.log(result)
+                resolve(result)
+            })
+        })
+    },
+    unBlocKUser:(id)=>{
+        console.log(id)
+        return new Promise((resolve, reject)=>{
+             db.get().collection("users").updateOne({_id:ObjectID(id)}, {
+                $set:{isBlocked:false}
+            }).then((result)=>{
+                console.log(result)
+                resolve(result)
+            })
+        })
     }
+
 }

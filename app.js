@@ -11,20 +11,25 @@ const adminRouter = require("./routes/admin")
 const db = require("./config/connection");
 const app = express();
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
-
+const MongoDBStore = require('connect-mongodb-session')(session);
+const store = new MongoDBStore({
+  uri: "mongodb://localhost:27017/user-management",
+  collection: 'Sessions'
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+// DB connections
 db.connect((err)=>{
   if(err) console.log("DB Connection Error :\n" +err)
   else console.log("DB Connected")
 })
 app.use(session({
   secret: "ajmal",
-  // store: store,
-  resave: false,
-  saveUninitialized: false, 
+  store: store,
+  resave: true,
+  saveUninitialized: true, 
   cookie: {
     maxAge: 3600000 
   }

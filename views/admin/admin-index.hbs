@@ -1,11 +1,8 @@
 {{!-- NAVBAR, Hero section features footer --}}
   <script>
-            $(document).ready( function () {
-    $('#myTable').DataTable();
-        } );
         </script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand pl-3" href="#">Admin Panel</a>
+  <a class="navbar-brand pl-3" href="/">Admin Panel</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,9 +20,9 @@
           {{admin.name}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: smaller;">
-          <a class="dropdown-item" href="#">Logout User (current host)</a>
+          {{!-- <a class="dropdown-item" href="/admin/logout-user">Logout User (current host)</a> --}}
           <a class="dropdown-item" href="#">Logout All users</a>
-          <a class="dropdown-item" href="/logout">Logout Admin</a>
+          <a class="dropdown-item" href="/admin/logout">Logout Admin</a>
         </div>
       </li>
     </ul>
@@ -46,6 +43,7 @@
       <th scope="col">City</th>
       <th scope="col">Country</th>
       <th scope="col">Phone</th>
+        <th scope="col">Status</th>
       <th scope="col">Actions</th>
     
     
@@ -63,10 +61,22 @@
       <td scope="row">{{this.address.city}} </td>
       <td scope="row">{{this.address.country}} </td>
     <td scope="row">{{this.phone}} </td>
+    <td scope="row">
+      {{#if this.isBlocked}}
+      Blocked 
+    {{else }}
+    Active
+    {{/if}}
+    </td>
     <td scope="row"> 
       <div class="btn-group btn-group-sm">
-            <a href="/admin/edit-user/{{this._id}}" class="btn btn-primary button">Edit</a>
-            <a href="/admin/delete-user/{{this._id}}"  onclick=" return confirm('Are sure you Block this user {{this.itemName}}?')" class="btn btn-danger button">Block</a> </div>
+            <a href="/admin/edit-user/{{this._id}}" class="btn btn-primary button mx-1">Edit</a>
+             {{#if this.isBlocked}}
+             <button disabled class="btn btn-danger button mx-1">Block</button>
+              {{else }}
+              <button onclick=" return confirm('Are sure you Block  {{this.name}}?')  && blockUser('{{this._id}}');" class="btn btn-danger button mx-1">Block</button> </div>
+                 {{/if}}
+            
     </td>
     </tr>
    {{/each}}
@@ -78,3 +88,8 @@
             <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; web 2021</p></div>
         </footer>
 
+<script>
+  function blockUser(id){
+    alert("hello")
+  }
+</script>

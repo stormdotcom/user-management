@@ -15,7 +15,9 @@ const verifyLogin = (req, res, next) => {
 /* GET admin . */
 router.get('/',verifyLogin,  async function(req, res, next) {
   let admin = req.session.admin
-  let users =await db.get().collection("users").find().toArray()
+  let userArray =await db.get().collection("users").find().toArray();
+  let users = userArray.filter(each => !each?.isAdmin);
+
   res.render('admin/admin-index', {title: "Admin Panel", users, admin})
 });
 
@@ -51,9 +53,35 @@ router.get("/edit-user/:id", async function(req, res){
 router.post("/edit-user/:id", function(req, res){
   adminAction.updateUser(req.params.id, req.body).then(()=>{
     res.redirect("/admin");  
+  });
+ 
+router.post("/block-user",  function(req, res){
+  adminAction.blocKUser(id).then((status)=>{
+    res.redirect('/admin')
   })
-  
-  
+})
+router.post("/unblock-user/:id",  function(req, res){
+  adminAction.unBlocKUser(req.body).then((status)=>{
+    res.redirect('/admin')
+  })
+})
+// Delete User
+router.post("/delete-user/:id",  function(req, res){
+  let id = req.params.id
+  adminAction.unBlocKUser(id).then((status)=>{
+    res.redirect('/admin')
+  })
+})
+
+router.get("/logout-user", function(req, res){
+  req.session.user.userLoggedIn=false;
+  req.session.user=null;
+  res.redirect("/admin")
+});
+router.get("/logout-all", function(req, res){
+ adminAction.allUserLogout(req.session.admin)
+  res.redirect("/admin")
+});
 
 })
 

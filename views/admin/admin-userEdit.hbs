@@ -57,11 +57,22 @@
     <input type="file" class="form-control" name="image" accept="image/x-png,image/gif,image/jpeg" id="imgInput">
   </div> --}}
  <div class="form-group mb-2 text-center"></div>
- <div class="row justify-content-center">
-  <button type="submit" class="row btn btn-success mt-4  ">Update Information</button> </div>
+ <div class="row d-flex align-content-center justify-content-around">
+  <button type="submit" class="row btn btn-success mt-4  ">Update Information</button>
+  {{#if user.isBlocked}}
+   <Button onclick="unblockUser({{user._id}})" class="row btn btn-warning mt-4  ">Unblock User</button>
+   {{/if}}
+   <button  style="color: #fff;" onclick="return confirm('Are your sure want delete this user?') && deleteUser({{user._id}})"  class="row btn btn-danger mt-4  ">Delete User</button>
+   </div>
     </div>
 </form>
             </div>
         </div>
     </div>
 </section>
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+        } );
+
+</script>

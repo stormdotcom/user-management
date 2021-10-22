@@ -1,3 +1,4 @@
+
 $.validator.addMethod("alpha", function (value, element) {
     return this.optional(element) || value == value.match(/^[a-zA-Z\s]+$/);
 });
@@ -15,51 +16,47 @@ $.validator.addMethod("matchPass", function (value, element) {
         return false;
     }
 });
-// $(document).ready(()=>{
-//     // Login    
-//     $("#form1").validate({
-//         rules:{
-//             email:{
-//                 required: true,
-//                 minlength:3,
-//                 isEmail:true
-//             },
-//             password:{
-//                 required:true,
-//                 minlength:5,
-//             }
-//         },
-//         messages:{
-//             email:{
-//                 required: "*Required Feild",
-//                 minlength:"Min character 3",
-//                 isEmail:"Enter a valid Email"
-//             },
-//             password:{
-//                 required:"*Required Feild",
-//                 minlength:"Min character 5",
-
-//             }
-//         },
-//         submitHandler:function(form){
-//             $.ajax({
-//                 url:"/login",
-//                 data:$("#form1").serialize(),
-//                 method:"POST",
-//                 success:function(res){
-//                     if (res) {
-//                         location.href='/'  
-//                 }},
-//                 error:function(res){
-//                     alert("something went wrong !");
-//                 }
-//             })
-//         }
-//     })
-
-// })
-// SignUp
 $(document).ready(()=>{
+    // Login    
+    $("#form1").validate({
+        rules:{
+            email:{
+                required: true,
+                minlength:3,
+                isEmail:true
+            },
+            password:{
+                required:true,
+                minlength:5,
+            }
+        },
+        messages:{
+            email:{
+                required: "*Required Feild",
+                minlength:"Min character 3",
+                isEmail:"Enter a valid Email"
+            },
+            password:{
+                required:"*Required Feild",
+                minlength:"Min character 5",
+
+            }
+        },
+        submitHandler:function(form){
+            $.ajax({
+                url:"/login",
+                data:$("#form1").serialize(),
+                method:"POST",
+            })
+        }
+    })
+
+})
+
+$(document).ready(()=>{
+
+
+    // SignUp
     $("#form2").validate({
         rules:{
             name:{
@@ -108,15 +105,28 @@ $(document).ready(()=>{
                 url:"/signup",
                 data:$("#form2").serialize(),
                 method:"POST",
-                success:function(res){
-                    if (res) {
-                        location.href='/'
-
-                    
-                }
-            }
         })
     }
 
 })
 })
+function blockUser(id){
+    $.ajax({
+        url:"/admin/block-user/",
+        method:"POST",
+        data:{id},
+        success:(res)=>{
+            location.href="/admin"
+        }
+})
+}
+
+function unblockUser(id){
+    $.ajax({
+        url:"/admin/unblock-user/" +id,
+        method:"POST",
+        success:(res)=>{
+            location.href="/admin"
+        }
+})
+}

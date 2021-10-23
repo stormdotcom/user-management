@@ -13,3 +13,5 @@ a user management system build using MEN stack, user can signup login, with sess
 ![admin-user](https://user-images.githubusercontent.com/84835379/138567261-0e1aab57-a60e-4433-8aff-43b831db5d52.png)
 
 
+##### Admin Side user profile edit
+![edit user admin](https://user-images.githubusercontent.com/84835379/138567452-4ddebec0-c2d7-4cc9-8726-b422908aa66f.png)

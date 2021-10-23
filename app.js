@@ -63,5 +63,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+// TODOs
+// Clean code make make code consistent
+// Logout session bug fixes, while deleting user
+// admin can logout one particular user
+// User Side edit profiles
 module.exports = app;

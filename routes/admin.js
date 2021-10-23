@@ -45,7 +45,7 @@ router.post('/login', function(req, res, next) {
   })
 });
 // Edit users
-router.get("/edit-user/:id", async function(req, res){
+router.get("/edit-user/:id", verifyLogin, async function(req, res){
   let user = await adminAction.getUser(req.params.id)
   res.render("admin/admin-userEdit", {user})
 });
@@ -68,7 +68,7 @@ router.post("/unblock-user/",  function(req, res){
   })
 })
 // Add User
-router.get("/add-user/", function(req, res){
+router.get("/add-user/",verifyLogin, function(req, res){
   res.render("admin/add-user");
 })
 router.post("/add-user/",async function(req, res){
@@ -79,33 +79,45 @@ router.post("/add-user/",async function(req, res){
 })
 
 // View individual user
-router.get("/user-view/:id",async function(req, res){
+router.get("/user-view/:id", verifyLogin,async function(req, res){
   let id = req.params.id;
-  id=id.trim()
-  console.log("test", id)
   let user =await adminAction.getUser(id)
   res.render("admin/user-view", user)
 })
 
+// Update user password
+router.post("/user-view/:id",verifyLogin, function(req, res){
+  let id = req.params.id
+  adminAction.updateUserPassword(id, req.body).then(()=>{
+    res.redirect("/admin")
+  })
+})
 
 
 // Delete User
-router.post("/delete-user/",  function(req, res){
+router.post("/delete-user/",verifyLogin,  function(req, res){
   adminAction.deleteUser(req.body.id).then((status)=>{
+    req.session.user=null;
+    req.session.userLoggedIn=false;
     res.json({status:true})
   })
 })
 // logout single user
-router.get("/logout-user", function(req, res){
+router.get("/logout-current-host-user", function(req, res){
   req.session.userLoggedIn=false;
   req.session.user=null;
   res.redirect("/admin")
 });
-router.get("/logout-all", function(req, res){
- adminAction.allUserLogout(req.session.admin)
-  res.redirect("/admin")
+// logout All users
+router.get("/logout-all", verifyLogin, function(req, res){
+  console.log("call here")
+  let id = req.session.admin._id.toString();
+ adminAction.allUserLogout(id).then((result)=>{
+   if(result) res.redirect("/admin")
+ })
 });
 
+// Logout Admin
 router.get('/logout', (req, res)=> {
   req.session.admin=null
   req.session.adminLoggedIn=false

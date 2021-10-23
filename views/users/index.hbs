@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <button disabled class="profile-edit-btn" name="btnAddMore" >Edit Profile</button>
                     </div>
                 </div>
                 <div class="row">
@@ -97,6 +97,14 @@
                                                 <p>{{user.name}}</p>
                                             </div>
                                         </div>
+                                            <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Age</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.age}}</p>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Email</label>
@@ -111,6 +119,22 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{user.phone}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Place</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.address.place}}</p>
+                                            </div>
+                                        </div>
+                                            <div class="row">
+                                            <div class="col-md-6">
+                                                <label>City</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.address.city}}</p>
                                             </div>
                                         </div>
                                         <div class="row">

@@ -47,7 +47,6 @@ module.exports ={
 
     },
     blocKUser:(id)=>{
-        console.log(id);
         return new Promise((resolve, reject)=>{
              db.get().collection("users").updateOne({_id:ObjectID(id)}, {
                 $set:{isBlocked:true}
@@ -83,11 +82,38 @@ module.exports ={
     },
     addNewUser:(userData)=>{
         return new Promise(async (resolve, reject)=>{
-            userData.password = await bcrypt.hash(userData.password, 10)
+            userData.address={place:userData.place, city:userData.city, country:userData.country};;
+            userData.password = await bcrypt.hash(userData.password, 10);
             userData.isBlocked=false;
              db.get().collection("users").insertOne(userData).then((res)=>{
                  resolve(res.acknowledged)
              })
+        })
+    },
+    updateUserPassword:(id, userData)=>{
+        return new Promise(async (resolve, reject)=>{
+            userData.password= await bcrypt.hash(userData.password, 10)
+            db.get().collection("users").updateOne({_id:ObjectID(id)}, {$set:{password:userData.password}}).then((result)=>{
+                console.log(result)
+                resolve(result.acknowledged)
+            })
+        })
+    },
+    allUserLogout:(id)=>{
+        return new Promise(async(resolve, reject)=>{
+            let Id = ObjectID(id);
+            let timeOut= new Date().getTime();
+            await db.get().collection("Sessions").updateMany( {}, {$set:{'session.userLoggedIn':false, 'session.user':null}}).then((result)=>{
+                console.log(result)
+                resolve(result.acknowledged)
+            })
+        })
+    },
+    logoutOneUser:(id)=>{
+        return new Promise((resolve, reject)=>{
+            db.get().collection("Sessions").updateOne({_id:ObjectID(id)}, {set:{
+                "session.userLoggedIn":false
+            }})
         })
     }
 

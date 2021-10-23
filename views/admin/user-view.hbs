@@ -51,6 +51,7 @@
                         </div>
                     </div>
                     <div class="col-md-8">
+                        <form action="/admin/update-password/{{this._id}}" method="POST">     
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
@@ -128,7 +129,7 @@
                                                 <label>Password</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text">
+                                                <input type="password" >
                                             </div>
                                         </div>
                                         <div class="row">
@@ -136,16 +137,18 @@
                                                 <label>Retype Password</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text">
+                                                <input type="text" name="password">
                                             </div>
                                         </div>
                                 <div class="row">
                                     <div class="col-md-12 d-flex justify-content-center">
-                                       <button class="btn btn-primary mt-3" >Update Password</button>
+                                       <button type="submit" class="btn btn-primary mt-3" >Update Password</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    
+                    </form>
                     </div>
                 </div>
             </form>           

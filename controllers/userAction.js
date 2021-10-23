@@ -41,7 +41,10 @@ module.exports={
                             resolve(response)
                         }
                         else {
-                            console.log("Login failed | password")
+                            response.err.status=true
+                            response.err.msg="Login Failed ❌ Please try again"
+                            resolve(response)
+                           
                         }
                     })
                 }

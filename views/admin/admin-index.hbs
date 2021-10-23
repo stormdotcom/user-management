@@ -20,8 +20,8 @@
           {{admin.name}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: smaller;">
-          <a class="dropdown-item" href="/admin/logout-user">Logout User (current host)</a>
-          <a class="dropdown-item" href="#">Logout All users</a>
+          <a class="dropdown-item" href="/admin/logout-current-host-user">Logout User (current host)</a>
+          <a class="dropdown-item" href="/admin/logout-all">Logout All users</a>
           <a class="dropdown-item" href="/admin/logout">Logout Admin</a>
         </div>
       </li>
@@ -30,12 +30,12 @@
 </nav>
  <!-- Tables section-->
  <div class="col-md-12 mt-2 person-table">
-            <h3 class="py-3 mb-4 pt-5 align-center bold-head">All Users </h3>
+            <h3 class="py-3 mb-4 pt-5 align-center font-weight-bold text-center">All Users </h3>
             <div class="d-flex justify-content-end ">
              {{!-- <a href="" class="" ><i class="fas fa-user-minus ml-3"></i> <p class="font-weight-bold">Delete User</p> </a>  --}}
                <a href="/admin/add-user" class="ml-2"> <i class="fas fa-user-plus ml-3"></i> <p class="font-weight-bold"> Add User</p></a>
             </div>
-        <table class="table align-middle mt-3 mb-5 table-hover pb-5" id="myTable">
+        <table class="table align-middle mt-1 mb-5 table-hover pb-5" id="myTable">
         
   <thead>
     

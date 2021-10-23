@@ -1,22 +1,33 @@
 const express = require('express');
 const router = express.Router();
 const userAction = require("../controllers/userAction");
+const adminAction = require("../controllers/adminAction");
+const db = require("../config/connection");
 
-const verifyLogin = (req, res, next) => {
-  if (req.session?.userLoggedIn) {
+const verifyLogin = async(req, res, next) => {
+  if (req.session.userLoggedIn) {
     next();
   } else {
     res.redirect("/login");
   }
 };
+
 /* GET home page. */
-router.get('/', verifyLogin, function(req, res, next) {
-    let user = req.session.user
-    res.render('users/index', { title: 'Home  | ' +user.name , user });
+router.get('/', verifyLogin, async function(req, res, next) {
+    let id =req.session?.user?._id;
+    let user = await adminAction.getUser(id);
+    if(user){
+      res.render('users/index', { title: 'Home  | ' +user.name , user });
+    }
+    else {
+      req.session.userLoggedIn=false
+      res.redirect("/")
+    }
+    
 });
 /* GET Login page. */
 router.get('/login', function(req, res){
-  if(req.session.user){
+  if(req.session.userLoggedIn){
     res.redirect("/")
   }
   else res.render('users/login', { title: 'User Authentication'})
@@ -25,7 +36,7 @@ router.get('/login', function(req, res){
 })
 /* GET signup page. */
 router.get('/signup', function(req, res){
-  if(req.session.user){
+  if(req.session.userLoggedIn){
     res.redirect("/")
   }
   res.render('users/signup', { title: 'User Registration'})

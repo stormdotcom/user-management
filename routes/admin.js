@@ -67,7 +67,18 @@ router.post("/unblock-user/",  function(req, res){
     res.json({status:true})
   })
 })
+// Add User
+router.get("/add-user/", function(req, res){
+  res.render("admin/add-user");
+})
+router.post("/add-user/",async function(req, res){
+  await adminAction.addNewUser(req.body).then((response)=>{
+    if(response) res.redirect("/admin")
+    res.render("admin/add-user", {err: "Counld not add new user"})
+  });
+})
 
+// View individual user
 router.get("/user-view/:id",async function(req, res){
   let id = req.params.id;
   id=id.trim()
@@ -86,7 +97,7 @@ router.post("/delete-user/",  function(req, res){
 })
 // logout single user
 router.get("/logout-user", function(req, res){
-  req.session.user.userLoggedIn=false;
+  req.session.userLoggedIn=false;
   req.session.user=null;
   res.redirect("/admin")
 });

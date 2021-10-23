@@ -107,6 +107,51 @@ $(document).ready(()=>{
     // }
 
 })
+
+// Add new user
+$("#form4").validate({
+    rules:{
+        name:{
+            required: true,
+            minlength:3,
+            alpha: true
+        },
+        email:{
+            required:true,
+            minlength:3,
+            isEmail:true,
+
+        },
+        password:{
+            required:true,
+            minlength:5,
+        }
+    },
+    messages:{
+        name:{
+            alpha:"Characters only",
+            required: "*Required Feild",
+            minlength:"Min character 3"
+        },
+        email:{
+            required: "*Required Feild",
+            minlength:"Min character 3",
+            isEmail:"Enter a valid Email"
+        },
+        password:{
+            required:"*Required Feild",
+            minlength:"Min character 5",
+        }
+    }
+//     submitHandler:function(form){
+//         $.ajax({
+//             url:"/signup",
+//             data:$("#form2").serialize(),
+//             method:"POST",
+//     })
+// }
+
+})
 })
 $('#message1').css('display', 'none')
 function blockUser(id){
@@ -154,9 +199,4 @@ function deleteUser(id){
         }
     })
 }
-// function goToProfile(id){
-//     $.ajax({
-//         url:"/admin/user-view/",
-//         method:"get",
-//     })
-// }
+

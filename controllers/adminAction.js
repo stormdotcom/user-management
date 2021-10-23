@@ -80,6 +80,15 @@ module.exports ={
                 resolve(user)
             })
         })
+    },
+    addNewUser:(userData)=>{
+        return new Promise(async (resolve, reject)=>{
+            userData.password = await bcrypt.hash(userData.password, 10)
+            userData.isBlocked=false;
+             db.get().collection("users").insertOne(userData).then((res)=>{
+                 resolve(res.acknowledged)
+             })
+        })
     }
 
 }

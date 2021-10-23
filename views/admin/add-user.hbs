@@ -1,0 +1,82 @@
+<section>
+    <div class="container mt-3 mb-4">
+
+        <div class="row justify-content-center ">
+            <div class="col-md-6 ">
+                <h2 class="text-center pb-4 pt-4">Add New User</h2>
+      <div>
+        <a href="/admin" class="btn btn-secondary mb-3 w-30"> back</a>
+      </div>
+      {{#if err}}
+               <div class="alert alert-warning alert-dismissible fade show" id="message3" role="alert">
+                  <strong>&#10060; {{err}}</strong> 
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {{/if}}
+    <form action="/admin/add-user" method="POST" id="form4">
+  <div class="form-group mb-2 mt-">
+   
+  </div>
+  <div class="form-group mb-2">
+    <label for="">Full Name</label>
+    <input type="text" class="form-control" name="name" value="" required pattern="[A-Za-z]">
+  </div>
+    <div class="form-group mb-2">
+    <label for="">Email</label>
+    <input type="text" class="form-control" name="email" value="" >
+  </div>
+  <div class="form-group mb-2">
+    <label for="">Gender</label>
+    <select class="form-control" name="gender"  required>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+     </select>
+    
+  </div>
+  <div class="form-group mb-2">
+    <label for="">Age</label> 
+    <input type="text" class="form-control" name="age"  >
+  </div>
+    <div class="form-group mb-2">
+    <label for="">Place</label>
+    <input type="text" class="form-control" name="place" >
+  </div>
+      <div class="form-group mb-2">
+    <label for="">City</label>
+    <input type="text" class="form-control" name="city">
+  </div>
+        <div class="form-group mb-2">
+    <label for="">Country</label>
+    <input type="text" class="form-control" name="country" list="country" >
+      <datalist id="country">
+    <option value="India">
+    <option value="Australia">
+    <option value="USA">
+    <option value="UK">
+    <option value="Canada">
+  </datalist>
+  </div>
+        <div class="form-group mb-2">
+    <label for="">Phone</label>
+    <input type="text" class="form-control" name="phone" required>
+  </div>
+    <div class="form-group mb-2">
+    <label for="">Password</label>
+    <input type="text" class="form-control" name="password"  value="" required>
+  </div>
+    {{!-- <div class="form-group mb-2">
+    <label for="">Profile Picture</label>
+    <img src="#" alt="product-image" style="width: 100px; height: 100px; padding: 3%" id="uploadedImg">
+    <input type="file" class="form-control" name="image" accept="image/x-png,image/gif,image/jpeg" id="imgInput">
+  </div> --}}
+ <div class="form-group mb-2 text-center"></div>
+ <div class="row d-flex align-content-center justify-content-around">
+  <button type="submit" class="row btn btn-primary mt-4  ">Submit</button>
+   </div>
+    </div>
+</form>
+            </div>
+        </div>
+    </div>
+</section>

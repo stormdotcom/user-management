@@ -31,10 +31,17 @@
  <!-- Tables section-->
  <div class="col-md-12 mt-2 person-table">
             <h3 class="py-3 mb-4 pt-5 align-center bold-head">All Users </h3>
+            <div class="d-flex justify-content-end ">
+             {{!-- <a href="" class="" ><i class="fas fa-user-minus ml-3"></i> <p class="font-weight-bold">Delete User</p> </a>  --}}
+               <a href="/admin/add-user" class="ml-2"> <i class="fas fa-user-plus ml-3"></i> <p class="font-weight-bold"> Add User</p></a>
+            </div>
         <table class="table align-middle mt-3 mb-5 table-hover pb-5" id="myTable">
+        
   <thead>
+    
     <tr>
        <th scope="col">#</th>
+       
       <th scope="col">Name</th>
        <th scope="col">Email</th>
       <th scope="col">Age</th>

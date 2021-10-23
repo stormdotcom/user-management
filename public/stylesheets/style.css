@@ -68,7 +68,8 @@ thead {
   transition: all 100ms ease-in;
 }
 .view-btn:hover {
-
+  text-decoration: none;
+  color: #ffff;
   background-color: #365f86;
 }
 /* User Profile */
@@ -164,5 +165,9 @@ thead {
   font-weight: 600;
   color: #0062cc;
 }
-
-
+a {
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: none;
+}

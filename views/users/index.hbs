@@ -27,13 +27,13 @@
   </div>
 </nav>
  <!-- Features section-->
-       
+  
 <div class="container emp-profile">
             <form method="post">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                             <img src="/images/index.png" height="100px" alt=""/>
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
@@ -43,7 +43,7 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                       {{this.name}}
+                                       {{user.name}}
                                     </h5>
                                     <h6>
                                         Web Developer and Designer
@@ -54,7 +54,7 @@
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Credentials </a>
                                 </li>
                             </ul>
                         </div>
@@ -86,7 +86,7 @@
                                                 <label>User Id</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Kshiti123</p>
+                                                <p>{{user._id}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -94,7 +94,7 @@
                                                 <label>Name</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Kshiti Ghelani</p>
+                                                <p>{{user.name}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -102,7 +102,7 @@
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>kshitighelani@gmail.com</p>
+                                                <p>{{user.email}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -110,65 +110,68 @@
                                                 <label>Phone</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>123 456 7890</p>
+                                                <p>{{user.phone}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Profession</label>
+                                                <label>Country</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Web Developer and Designer</p>
+                                                <p>{{user.address.country}}</p>
                                             </div>
                                         </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
+                                            <div class="row">
                                             <div class="col-md-6">
-                                                <label>Experience</label>
+                                                <label>Registered Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Hourly Rate</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>10$/hr</p>
+                                                <p>{{user.email}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Total Projects</label>
+                                                <label>Status</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>230</p>
+                                                {{#if user.isBlocked}}
+                                                <p>Access Disabled</p>
+                                                {{else}}
+                                                <p>Active</p>
+                                                {{/if}}
+                                            </div>
+                                        </div>
+                                        {{!-- <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Password Strength</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Moderate</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>English Level</label>
+                                                <label>Password</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Expert</p>
+                                                <input type="text">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Availability</label>
+                                                <label>Retype Password</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>6 months</p>
+                                                <input type="text">
                                             </div>
-                                        </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
+                                        </div> --}}
+                                {{!-- <div class="row">
+                                    <div class="col-md-12 d-flex justify-content-center">
+                                       <button class="btn btn-primary mt-3" >Update Password</button>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -176,6 +179,10 @@
             </form>           
         </div>
         
+        <footer class="py-1 bg-dark fixed-bottom mt-2" >
+            <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; web 2021</p></div>
+        </footer>
+
         <footer class="py-1 bg-dark fixed-bottom mt-2" >
             <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; web 2021</p></div>
         </footer>

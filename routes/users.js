@@ -76,7 +76,7 @@ router.post('/login', function(req, res){
   });
 
 router.get("/logout", function(req, res){
-  req.session.user.userLoggedIn=false;
+  req.session.userLoggedIn=false;
   req.session.user=null;
   res.redirect("/login")
 })

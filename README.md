@@ -1,7 +1,7 @@
 # User Management System
 ### Nodejs ExpressJS MongoDB
 #### bcrypt | Promise | handlebars | connect-mongodb-session
-a user management system build using MEN stack, user can signup login, with session maintaned in MongoDB  have a admin, admin can full control over all users from panel. admin will get a insights all users from panel, directly block-unblock user's from panel. Edit user information, add new user, update any user's password. Logout any particular user as required and logout all users. logout user in same client
+a user management system build using MEN stack, user can signup login, with session maintaned in MongoDB,Admin have singup, admin can full control over all users from panel. admin will get a insights all users from panel, directly block-unblock user's from panel. Edit user information, add new user, update any user's password. Lcan log out a specific users or all users as required. logout user in same client
 
 ##### User side view
 ![user](https://user-images.githubusercontent.com/84835379/138567187-614bf20d-14d3-45d2-b85e-bd6270217880.jpeg)

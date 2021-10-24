@@ -1,9 +1,11 @@
+const dotenv = require('dotenv')
+dotenv.config()
 const mongoClient = require("mongodb").MongoClient
 const dbState = {
     db:null
 }
 module.exports.connect=function(done){
-    let url = "mongodb://localhost:27017/DB"
+    let url = process.env.DB
     let dbname="user-management"
 
     mongoClient.connect(url, (err, data)=>{

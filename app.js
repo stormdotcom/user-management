@@ -1,3 +1,5 @@
+const dotenv = require('dotenv')
+dotenv.config()
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -10,10 +12,11 @@ const userRouter = require('./routes/users');
 const adminRouter = require("./routes/admin")
 const db = require("./config/connection");
 const app = express();
+console.log(process.env.DB)
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const store = new MongoDBStore({
-  uri: "mongodb://localhost:27017/user-management",
+  uri: process.env.DB,
   collection: 'Sessions'
 });
 
@@ -64,6 +67,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 // TODOs
+// ENV setup
 // Clean code make make code consistent
 // Logout session bug fixes, while deleting user
 // admin can logout one particular user

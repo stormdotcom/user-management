@@ -3,7 +3,15 @@
     <div class="col-12 col-sm-11 col-md-10 col-lg-8 py-2">
         <h1>Administrator</h1>
       {{! Error message here }}
-      <form action="/admin/login" method="post">
+      {{#if err.status}}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>!</strong> <small>{{err.msg}}</small>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+      {{/if}}
+      <form action="/admin/login" id="form5" method="post">
         <div class="form-row d-flex justify-content-center">
           <div class="col-lg-10 py-3">
             <input

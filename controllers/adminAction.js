@@ -8,15 +8,28 @@ module.exports ={
     login:(data)=>{
         return new Promise(async(resolve, reject)=>{
             let admin = await db.get().collection("admin").findOne({email:data.email})
+            let response={err:{status:false, msg:""}}
             if(admin){
                 bcrypt.compare(data.password, admin.password).then((status)=>{
                     if(status){
-                        resolve(admin)
+                        response.admin=admin
+                        resolve(response)
                     }
-                    else console.log("Err fetching admin password")
+                    else {
+                        response.err.status=true;
+                        response.err.msg="Failed Login"
+                         resolve(response)
+                         console.log("Err fetching admin password")
+                    } 
                 })
             }
-            else console.log("admin failed")
+            
+            else {
+               response.err.status=true;
+               response.err.msg="Failed Login"
+                resolve(response)
+            }
+            
         })
     },
     getUser:(id)=>{
@@ -104,16 +117,19 @@ module.exports ={
             let Id = ObjectID(id);
             let timeOut= new Date().getTime();
             await db.get().collection("Sessions").updateMany( {}, {$set:{'session.userLoggedIn':false, 'session.user':null}}).then((result)=>{
-                console.log(result)
                 resolve(result.acknowledged)
             })
         })
     },
     logoutOneUser:(id)=>{
+        console.log("action " + id)
         return new Promise((resolve, reject)=>{
-            db.get().collection("Sessions").updateOne({_id:ObjectID(id)}, {set:{
-                "session.userLoggedIn":false
-            }})
+            db.get().collection("Sessions").updateOne({'session.user._id':ObjectID(id)}, {$set:{
+                'session.userLoggedIn':false, 'session.user':null
+            }}).then((result)=>{
+                console.log(result)
+                resolve({status:true})
+            })
         })
     }
 

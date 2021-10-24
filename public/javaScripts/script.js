@@ -49,6 +49,31 @@ $(document).ready(()=>{
         //         method:"POST",
         //     })
         // }
+    }),
+    $("#form5").validate({
+        rules:{
+            email:{
+                required: true,
+                minlength:3,
+                isEmail:true
+            },
+            password:{
+                required:true,
+                minlength:5,
+            }
+        },
+        messages:{
+            email:{
+                required: "*Required Feild",
+                minlength:"Min character 3",
+                isEmail:"Enter a valid Email"
+            },
+            password:{
+                required:"*Required Feild",
+                minlength:"Min character 5",
+
+            }
+        }
     })
 
 })

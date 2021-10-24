@@ -60,7 +60,6 @@ router.post('/signup', function(req, res) {
 // Handle login
 router.post('/login', function(req, res){
     userAction.login(req.body).then((response)=>{
-      console.log(response.err.status)
       if(!response.err.status) {
         req.session.user=response.user
         req.session.user.password=null

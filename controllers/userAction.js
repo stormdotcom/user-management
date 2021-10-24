@@ -11,6 +11,8 @@ module.exports={
             if(!alreadyExists){
                 userData.isBlocked=false;
                 userData.address={place:"", city:"", country:""}
+                userData.password=userData.password2
+                userData.password2=null;
                 userData.password = await bcrypt.hash(userData.password, 10)
                 db.get().collection("users").insertOne(userData).then(async (data) =>{
                     let id = data.insertedId.toString()

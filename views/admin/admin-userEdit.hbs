@@ -1,3 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand pl-3" href="/">Admin Panel</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto pr-4">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+      <li class="nav-item dropdown pr-5">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{admin.name}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: smaller;">
+          <a class="dropdown-item" href="/admin/logout-current-host-user">Logout User (current host)</a>
+          <a class="dropdown-item" href="/admin/logout-all">Logout All users</a>
+          <a class="dropdown-item" href="/admin/logout">Logout Admin</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
 <section>
     <div class="container mb-4">
 
@@ -74,6 +101,10 @@
         </div>
     </div>
 </section>
+    
+        <footer class="py-1 bg-dark fixed-bottom mt-2" >
+            <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; web 2021</p></div>
+        </footer>
 <script>
   $(document).ready( function () {
     $('#myTable').DataTable();

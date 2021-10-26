@@ -34,7 +34,10 @@ app.use(session({
     maxAge: 3600000 
   }
       }))
-app.use(logger('dev'));
+
+if(!process.env.NODE_ENV==="production"){
+  app.use(logger('dev'));
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -50,7 +53,9 @@ app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  const error = new Error("Ohoh Not found!")
+  error.status=404
+  next(error)
 });
 
 // error handler

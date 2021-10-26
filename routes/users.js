@@ -6,7 +6,23 @@ const db = require("../config/connection");
 
 const verifyLogin = async(req, res, next) => {
   if (req.session.userLoggedIn) {
-    next();
+    let id =req.session?.user?._id;
+    let user = await adminAction.getUser(id);
+    if(user){
+       if(!user.isBlocked) {
+        next();
+       }
+       else {
+        req.session.userLoggedIn=false
+        res.redirect("/login")
+       }
+
+    }
+    else {
+      req.session.userLoggedIn=false
+      res.redirect("/login")
+    }
+
   } else {
     res.redirect("/login");
   }
@@ -16,14 +32,8 @@ const verifyLogin = async(req, res, next) => {
 router.get('/', verifyLogin, async function(req, res, next) {
     let id =req.session?.user?._id;
     let user = await adminAction.getUser(id);
-    if(user){
       res.render('users/index', { title: 'Home  | ' +user.name , user });
-    }
-    else {
-      req.session.userLoggedIn=false
-      res.redirect("/")
-    }
-    
+
 });
 /* GET Login page. */
 router.get('/login', function(req, res){

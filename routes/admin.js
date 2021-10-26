@@ -70,8 +70,6 @@ router.post("/edit-user/:id", function(req, res){
 // Block User
 router.post("/block-user",  function(req, res){
   adminAction.blocKUser(req.body.id).then((status)=>{
-    req.session.userLoggedIn=false;
-    req.session.user=null;
     adminAction.logoutOneUser(req.body.id)
     res.json({status:true})
   })
@@ -108,12 +106,9 @@ router.post("/user-view/:id",verifyLogin, function(req, res){
   })
 })
 
-
 // Delete User
 router.post("/delete-user/",verifyLogin,  function(req, res){
   adminAction.deleteUser(req.body.id).then((status)=>{
-    req.session.userLoggedIn=false;
-    req.session.user=null;
     adminAction.logoutOneUser(req.body.id)
     res.json({status:true})
   })

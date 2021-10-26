@@ -80,7 +80,7 @@
       <div class="btn-group btn-group-sm">
             <a href="/admin/edit-user/{{this._id}}" class="btn btn-primary button mx-1">Edit</a>
              {{#if this.isBlocked}}
-             <button onclick="unblockUser('{{this._id}}')" class="btn btn-danger button mx-1">Unblock</button>
+             <button onclick="return confirm('Are sure you sure want to Unblock  {{this.name}}?')  && unblockUser('{{this._id}}');" class="btn btn-danger button mx-1">Unblock</button>
               {{else }}
               <button onclick=" return confirm('Are sure you sure want to Block  {{this.name}}?')  && blockUser('{{this._id}}');" class="btn btn-danger button mx-1">Block</button> </div>
                  {{/if}}
